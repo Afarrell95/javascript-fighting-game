@@ -8,7 +8,7 @@ canvas.height = 576;
 //fillRect takes four arguments: x position, y position, width, height
 canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
-const gravity = 0.2;
+const gravity = 0.35;
 
 //creating the players
 
@@ -17,6 +17,7 @@ class Sprite {
     this.position = position;
     this.velocity = velocity;
     this.height = 150;
+    this.lastKey;
   }
 
   drawSprite() {
@@ -68,6 +69,18 @@ const keys = {
   d: {
     pressed: false,
   },
+  w: {
+    pressed: false,
+  },
+  ArrowRight: {
+    pressed: false,
+  },
+  ArrowLeft: {
+    pressed: false,
+  },
+  ArrowUp: {
+    pressed: false,
+  },
 };
 
 function animate() {
@@ -84,6 +97,14 @@ function animate() {
   } else if (keys.d.pressed) {
     player.velocity.x = 1;
   }
+
+  enemy.velocity.x = 0;
+
+  if (keys.ArrowLeft.pressed) {
+    enemy.velocity.x = -1;
+  } else if (keys.ArrowRight.pressed) {
+    enemy.velocity.x = 1;
+  }
 }
 
 let lastKey;
@@ -94,11 +115,27 @@ window.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "d":
       keys.d.pressed = true;
-      //   lastKey = "d";
+      lastKey = "d";
       break;
     case "a":
       keys.a.pressed = true;
-      //   lastKey = "a";
+      lastKey = "a";
+      break;
+    case "w":
+      keys.w.pressed = true;
+      player.velocity.y = -10;
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = true;
+      enemy.lastKey = "ArrowRight";
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = true;
+      enemy.lastKey = "ArrowLeft";
+      break;
+    case "ArrowUp":
+      keys.ArrowUp.pressed = true;
+      enemy.velocity.y = -10;
       break;
   }
   console.log(event.key);
@@ -111,6 +148,18 @@ window.addEventListener("keyup", (event) => {
       break;
     case "a":
       keys.a.pressed = false;
+      break;
+    case "w":
+      keys.w.pressed = false;
+      break;
+    case "ArrowRight":
+      keys.ArrowRight.pressed = false;
+      break;
+    case "ArrowLeft":
+      keys.ArrowLeft.pressed = false;
+      break;
+    case "ArrowUp":
+      keys.ArrowUp.pressed = false;
       break;
   }
   console.log(event.key);
