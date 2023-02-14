@@ -2,6 +2,7 @@
     padding: 0;
     margin:0;
     box-sizing:border-box;
+    font-family: 'Press Start 2P', cursive;
 }
 
 canvas{
@@ -25,7 +26,7 @@ canvas{
 .enemy-bar
 {
     border-radius: 15px;
-    height: 30px;
+    height: 25px;
 }
 
 .player-health,
@@ -41,9 +42,32 @@ background-color: rgb(75, 230, 87);
 width: 100%;
 }
 
+.player-health{
+    display: flex;
+    justify-content: flex-end;
+}
+
 .timer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: yellow;
+    font-size: 2rem;
     border: solid 3px yellow;
     border-radius: 5px;
     height:70px;
     width: 70px;
+}
+
+.win-results{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    font-size: 2rem;
+    color: yellow;
+    align-items: center;
+    justify-content: center;
+    display: none;
 }
