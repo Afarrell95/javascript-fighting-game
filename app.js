@@ -34,7 +34,7 @@ class Sprite {
   }
 
   drawSprite() {
-    //palyers
+    //players
     canvasContext.fillStyle = this.color;
     canvasContext.fillRect(
       this.position.x,
@@ -43,7 +43,7 @@ class Sprite {
       this.height
     );
 
-    //attackBock
+    //attackBox
     if (this.isAttacking) {
       canvasContext.fillStyle = "green";
       canvasContext.fillRect(
@@ -282,3 +282,10 @@ window.addEventListener("keyup", (event) => {
   }
   console.log(event.key);
 });
+
+//TODO:
+//add start button
+//add sprites
+//stop animate when game ends
+//create win count
+//create crouchdown functionality
