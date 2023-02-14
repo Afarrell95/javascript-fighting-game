@@ -1,0 +1,49 @@
+*{
+    padding: 0;
+    margin:0;
+    box-sizing:border-box;
+}
+
+canvas{
+    width: 100%;
+}
+
+.container{
+    position: relative;
+}
+
+.health-bar-container{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.player-health,
+.enemy-health,
+.player-bar,
+.enemy-bar
+{
+    border-radius: 15px;
+    height: 30px;
+}
+
+.player-health,
+.enemy-health
+{
+background-color: rgb(230, 75, 75);
+width:40%;
+}
+
+.player-bar,
+.enemy-bar{
+background-color: rgb(75, 230, 87);
+width: 100%;
+}
+
+.timer{
+    border: solid 3px yellow;
+    border-radius: 5px;
+    height:70px;
+    width: 70px;
+}

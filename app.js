@@ -30,6 +30,7 @@ class Sprite {
     };
     this.color = color;
     this.isAttacking;
+    this.health = 100;
   }
 
   drawSprite() {
@@ -171,7 +172,8 @@ function animate() {
     player.isAttacking
   ) {
     player.isAttacking = false;
-    console.log("hit");
+    enemy.health -= 5;
+    document.querySelector(".enemy-bar").style.width = enemy.health + "%";
   }
   //enemy attack
   if (
@@ -182,7 +184,8 @@ function animate() {
     enemy.isAttacking
   ) {
     enemy.isAttacking = false;
-    console.log("enemy hit");
+    player.health -= 5;
+    document.querySelector(".player-bar").style.width = player.health + "%";
   }
 }
 
