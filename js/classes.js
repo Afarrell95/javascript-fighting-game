@@ -1,18 +1,43 @@
 class Sprite {
-  constructor({ position, imageSrc }) {
+  constructor({ position, imageSrc, scale = 1, framesMax = 1, frameCurrent }) {
     this.position = position;
     this.width = 50;
     this.height = 150;
     this.image = new Image();
     this.image.src = imageSrc;
+    this.scale = scale;
+    this.framesMax = framesMax;
+    this.frameCurrent = 0;
+    this.framesElapsed = 0;
+    this.framesHold = 10;
   }
 
   drawSprite() {
-    canvasContext.drawImage(this.image, this.position.x, this.position.y);
+    canvasContext.drawImage(
+      this.image,
+      //crop
+      this.frameCurrent * (this.image.width / this.framesMax),
+      0,
+      this.image.width / this.framesMax,
+      this.image.height,
+      //
+      this.position.x,
+      this.position.y,
+      (this.image.width / this.framesMax) * this.scale,
+      this.image.height * this.scale
+    );
   }
 
   update() {
     this.drawSprite();
+    this.framesElapsed++;
+    if (this.framesElapsed % this.framesHold === 0) {
+      if (this.frameCurrent < this.framesMax - 1) {
+        this.frameCurrent++;
+      } else {
+        this.frameCurrent = 0;
+      }
+    }
   }
 }
 
@@ -66,7 +91,7 @@ class Fighter {
     this.position.x += this.velocity.x;
     this.position.y += this.velocity.y;
 
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
+    if (this.position.y + this.height + this.velocity.y >= canvas.height - 96) {
       this.velocity.y = 0;
     } else {
       this.velocity.y += gravity;
