@@ -41,6 +41,23 @@ const player = new Fighter({
     x: 0,
     y: 0,
   },
+  imageSrc: "./assets/samurai/Idle.png",
+  framesMax: 8,
+  scale: 2.5,
+  offset: {
+    x: 215,
+    y: 155,
+  },
+  sprites: {
+    idle: {
+      imageSrc: "./assets/samurai/Idle.png",
+      framesMax: 8,
+    },
+    run: {
+      imageSrc: "./assets/samurai/Run.png",
+      framesMax: 8,
+    },
+  },
 });
 
 const enemy = new Fighter({
@@ -91,14 +108,17 @@ function animate() {
   shop.update();
   window.requestAnimationFrame(animate);
   player.update();
-  enemy.update();
+  // enemy.update();
 
   player.velocity.x = 0;
 
+  player.image = player.sprites.idle.image;
   if (keys.a.pressed) {
     player.velocity.x = -5;
+    player.image = player.sprites.run.image;
   } else if (keys.d.pressed) {
     player.velocity.x = 5;
+    player.image = player.sprites.run.image;
   }
 
   enemy.velocity.x = 0;
@@ -146,10 +166,12 @@ window.addEventListener("keydown", (event) => {
     case "d":
       keys.d.pressed = true;
       player.lastKey = "d";
+
       break;
     case "a":
       keys.a.pressed = true;
       player.lastKey = "a";
+
       break;
     case "w":
       keys.w.pressed = true;
